@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Map للغات البرمجة</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #00416a;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        h1 {
+            color: #333;
+            margin: 20px 0;
+        }
+        .roadmap-container {
+            display: grid; /* استخدام تخطيط الشبكة */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* عدد الأعمدة */
+            gap: 20px; /* المسافة بين العناصر */
+            margin: 30px; /* الهامش حول الحاوية */
+        }
+        .roadmap-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center; /* توسيط النص داخل العنصر */
+        }
+        .roadmap-item:hover {
+            transform: scale(1.05);
+        }
+        .roadmap-item a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+        }
+        footer {
+            background-color:#00416a;
+            color: #fff;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Road Maps للغات البرمجة
+</header>
+
+<h1>اختر لغة البرمجة لعرض Road Map الخاص بها</h1>
+
+<div class="roadmap-container">
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/frontend" target="_blank">Front-End Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/backend" target="_blank">Back-End Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/react" target="_blank">React Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/nodejs" target="_blank">Node.js Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/cyber-security" target="_blank">Cyber Security Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/python" target="_blank">Python Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/java" target="_blank">Java Road Map</a>
+    </div>
+
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/aspnet-core" target="_blank">C# Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/golang" target="_blank">Go Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/flutter" target="_blank">Flutter Developer Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/ios" target="_blank">iOS Developer Road Map</a>
+    </div>
+    <div class="roadmap-item">
+        <a href="https://roadmap.sh/android" target="_blank">Android Developer Road Map</a>
+    </div>
+</div>
+
+<footer> الحقوق محفوظه لطلاب  قسم تقنية المعلومات كلية الاداب جامعه طنطا</footer>
+
+</body>
+</html>

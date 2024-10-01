@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار Flutter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #eee;
+            transition: 0.3s;
+        }
+        .option:hover {
+            background-color: #ddd;
+        }
+        #submit {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #submit:hover {
+            background-color: #555;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>اختبار Flutter</h2>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button id="submit" onclick="checkAnswer()">إرسال الإجابة</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "ما هي الكلمة المفتاحية لإنشاء ويدجت في Flutter؟", options: ["widget", "create", "new", "build"], correctAnswer: "widget" },
+            { question: "كيف يمكنك إضافة حافة (Padding) في Flutter؟", options: ["Padding()", "EdgeInsets()", "margin()", "padding()"], correctAnswer: "Padding()" },
+            { question: "ما هو نوع البيانات المستخدمة لتخزين قيم متغيرات الحالة؟", options: ["Stateful", "Stateless", "Var", "Final"], correctAnswer: "Stateful" },
+            { question: "ما هي المكتبة الأساسية لإنشاء تطبيقات Flutter؟", options: ["material.dart", "flutter.dart", "app.dart", "core.dart"], correctAnswer: "material.dart" },
+            { question: "كيف يمكنك التفاعل مع المستخدم في Flutter؟", options: ["Widgets", "Events", "Callbacks", "Controllers"], correctAnswer: "Events" },
+            { question: "كيف يمكنك إنشاء صف (Row) في Flutter؟", options: ["Row()", "Column()", "Flex()", "Grid()"], correctAnswer: "Row()" },
+            { question: "ما هي الطريقة الصحيحة لتحديث حالة ويدجت؟", options: ["setState()", "updateState()", "changeState()", "refreshState()"], correctAnswer: "setState()" },
+            { question: "ما هي الأداة المستخدمة لإنشاء قائمة (List)؟", options: ["ListView()", "Column()", "Container()", "GridView()"], correctAnswer: "ListView()" },
+            { question: "ما هي الكلمة المفتاحية لإنشاء فئة جديدة؟", options: ["class", "new", "define", "create"], correctAnswer: "class" },
+            { question: "كيف يمكنك إضافة صورة في Flutter؟", options: ["Image.asset()", "Image()", "loadImage()", "addImage()"], correctAnswer: "Image.asset()" },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption;
+
+        function displayQuestion() {
+            document.getElementById("result").innerHTML = "";
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question").innerText = currentQuestion.question;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.innerText = option;
+                optionElement.onclick = () => selectOption(optionElement);
+                optionsDiv.appendChild(optionElement);
+            });
+        }
+
+        function selectOption(optionElement) {
+            const options = document.getElementsByClassName("option");
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.backgroundColor = '#eee';
+            }
+            optionElement.style.backgroundColor = '#ccc';
+            selectedOption = optionElement.innerText;
+        }
+
+        function checkAnswer() {
+            if (!selectedOption) {
+                alert("من فضلك اختر إجابة قبل المتابعة!");
+                return;
+            }
+
+            const currentQuestion = questions[currentQuestionIndex];
+            const resultDiv = document.getElementById("result");
+
+            if (selectedOption === currentQuestion.correctAnswer) {
+                score++;
+                resultDiv.innerHTML = "إجابة صحيحة!";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = "إجابة خاطئة. حاول مرة أخرى.";
+                resultDiv.style.color = "red";
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(displayQuestion, 1000);
+            } else {
+                setTimeout(showFinalScore, 1000);
+            }
+        }
+
+        function showFinalScore() {
+            document.getElementById("question").innerText = "";
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("result").innerHTML = `مجموع درجاتك هو: ${score} من ${questions.length}`;
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>

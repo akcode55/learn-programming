@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معي</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* إضافة لتوسيع التصميم عموديًا */
+            height: 100vh;
+        }
+        .logo {
+            width: 250px; /* زيادة عرض الصورة */
+            height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+            margin-bottom: 20px; /* إضافة مسافة بين الصورة والنص */
+        }
+        .contact-container {
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .phone-number {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .whatsapp-btn {
+            background-color: #00416a;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .whatsapp-btn:hover {
+            background-color: #156597;
+        }
+        .whatsapp-btn i {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="hero.png" alt="شعار المشروع">
+
+    <div class="contact-container">
+        <h1>تواصل مع مطور المشروع (أحمد محمد قنديل) عبر الواتس اب او الهاتف المحمول</h1>
+        <div class="phone-number">+20 12 08462622</div>
+        <button class="whatsapp-btn" onclick="window.location.href='https://wa.me/201208462622'">
+            متابعة إلى الدردشة
+        </button>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

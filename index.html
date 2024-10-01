@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبر مهاراتك البرمجية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #00416a;
+            color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+        header h2 {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: #006494;
+        }
+        .fa-bars {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #00416a;
+                position: absolute;
+                right: 0;
+                top: 80px;
+                width: 200px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .nav-links a {
+                text-align: right;
+                padding: 15px;
+            }
+            .fa-bars {
+                display: block;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h3 {
+            margin: 15px 0;
+            color: #333;
+            font-size: 18px;
+        }
+        footer {
+            background-color:#00416a;
+            color: #fff;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>اختبر مهاراتك البرمجية</h1>
+            <h2>اختر اللغة البرمجية التي تريد اختبارها</h2>
+        </div>
+        <i id="btn-menu" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="Road.html">Road Maps </a>
+            <a href=" learn progeamming.html">Youtube Chaneels To Learn </a>
+       
+            <a href="Contact.html">Contact </a>
+            
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card" onclick="window.location.href='html-css-quiz.html'">
+            <h3>HTML/CSS</h3>
+        </div>
+        <div class="card" onclick="window.location.href='javascript-quiz.html'">
+            <h3>JavaScript</h3>
+        </div>
+        <div class="card" onclick="window.location.href='python-quiz.html'">
+            <h3>Python</h3>
+        </div>
+        <div class="card" onclick="window.location.href='java-quiz.html'">
+            <h3>Java</h3>
+        </div>
+        <div class="card" onclick="window.location.href='c++-quiz.html'">
+            <h3>c++</h3>
+        </div>
+        <div class="card" onclick="window.location.href='csharp-quiz.html'">
+            <h3>c#</h3>
+        </div>
+        <div class="card" onclick="window.location.href='dart-quiz.html'">
+            <h3>Dart</h3>
+        </div>
+        <div class="card" onclick="window.location.href='flutter-quiz.html'">
+            <h3>Flutter</h3>
+        </div>
+        <div class="card" onclick="window.location.href='kotlin-quiz.html'">
+            <h3>Kotlin</h3>
+        </div>
+    </div>
+<footer> الحقوق محفوظه لطلاب  قسم تقنية المعلومات كلية الاداب جامعه طنطا   </footer>
+
+
+    <script>
+        function toggleMenu() {
+            var navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

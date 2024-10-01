@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار C++</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #eee;
+            transition: 0.3s;
+        }
+        .option:hover {
+            background-color: #ddd;
+        }
+        #submit {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #submit:hover {
+            background-color: #555;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>اختبار C++</h2>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button id="submit" onclick="checkAnswer()">إرسال الإجابة</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // قائمة الأسئلة الخاصة بـ C++
+        const questions = [
+            { question: "ما هي الكلمة المفتاحية لإنشاء دالة في C++؟", options: ["function", "void", "def", "create"], correctAnswer: "void" },
+            { question: "ما هي نتيجة العملية 5 / 2 في C++؟", options: ["2", "2.5", "2.0", "3"], correctAnswer: "2" },
+            { question: "ما هي الكلمة المفتاحية المستخدمة لتعريف متغير ثابت؟", options: ["const", "static", "final", "immutable"], correctAnswer: "const" },
+            { question: "ما هو الاختصار الصحيح للتعليق في C++؟", options: ["//", "#", "/* */", "// and /*"], correctAnswer: "//" },
+            { question: "ما هي الطريقة الصحيحة لإنشاء كائن من فئة؟", options: ["ClassName obj;", "ClassName obj = new ClassName();", "ClassName obj();", "ClassName obj = ClassName();"], correctAnswer: "ClassName obj = new ClassName();" },
+            { question: "أي من الأنواع التالية تُستخدم لتخزين مجموعة من القيم المتشابهة؟", options: ["array", "set", "map", "list"], correctAnswer: "array" },
+            { question: "ما هي النتيجة المتوقعة من الكود التالي: int a = 10; int b = 20; int c = a + b;", options: ["10", "20", "30", "15"], correctAnswer: "30" },
+            { question: "ما هي الجملة الصحيحة لإنشاء حلقة تكرار في C++؟", options: ["for(int i = 0; i < 10; i++) {}", "repeat(i < 10) {}", "foreach(int i in 10) {}", "loop i from 0 to 10"], correctAnswer: "for(int i = 0; i < 10; i++) {}" },
+            { question: "ما هي الدالة المستخدمة لطباعة نص في C++؟", options: ["print()", "echo", "cout", "write()"], correctAnswer: "cout" },
+            { question: "ما هي الكلمة المفتاحية المستخدمة لإنهاء البرنامج في C++؟", options: ["end", "return", "exit", "stop"], correctAnswer: "return" },
+            { question: "ما هي النتيجة المتوقعة من 10 % 3؟", options: ["1", "3", "0", "10"], correctAnswer: "1" },
+            { question: "ما هي الطريقة الصحيحة لتعريف مصفوفة من الأعداد الصحيحة؟", options: ["int arr[];", "int arr[10];", "int arr(10);", "int arr = new int[10];"], correctAnswer: "int arr[10];" },
+            { question: "ما هي الطريقة الصحيحة للإعلان عن دالة تأخذ وسيطين وترجع عدد صحيح؟", options: ["int function(int a, int b);", "function int(int a, int b);", "int function(a, b);", "int function(a: int, b: int);"], correctAnswer: "int function(int a, int b);" },
+            { question: "ما هو اختصار الكلمة المفتاحية الخاصة بالتكرار؟", options: ["foreach", "for", "loop", "repeat"], correctAnswer: "for" },
+            { question: "كيف يمكنك إدراج ملف رأس في C++؟", options: ["#include <file>", "#include file.h", "import file.h", "using file.h"], correctAnswer: "#include <file>" },
+            { question: "ما هي النتيجة المتوقعة من الكود التالي: bool x = true; if (x) { cout << 'Yes'; } else { cout << 'No'; }", options: ["Yes", "No", "Error", "None"], correctAnswer: "Yes" },
+            { question: "ما هي الطريقة الصحيحة لتعريف كائن من نوع سلسلة نصية؟", options: ["string str;", "string str = '';", "string str = new String();", "string str = new string;"], correctAnswer: "string str = '';" },
+            { question: "ما هي الدالة المستخدمة لإدخال بيانات من المستخدم؟", options: ["cin", "input", "read", "get"], correctAnswer: "cin" },
+            { question: "ما هي الكلمة المفتاحية المستخدمة لإنشاء حلقة لانهائية؟", options: ["while(true)", "for(;;)", "repeat", "كل ما سبق"], correctAnswer: "كل ما سبق" },
+            { question: "ما هي الكلمة المفتاحية المستخدمة لتحديد نوع البيانات غير المحدد؟", options: ["any", "dynamic", "void", "null"], correctAnswer: "void" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption;
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            document.getElementById("result").innerHTML = ""; // إخفاء النتيجة
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question").innerText = currentQuestion.question;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = ""; // إعادة تعيين الخيارات
+
+            currentQuestion.options.forEach(option => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.innerText = option;
+                optionElement.onclick = () => selectOption(optionElement);
+                optionsDiv.appendChild(optionElement);
+            });
+        }
+
+        // اختيار إجابة
+        function selectOption(optionElement) {
+            const options = document.getElementsByClassName("option");
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.backgroundColor = '#eee';
+            }
+            optionElement.style.backgroundColor = '#ccc';
+            selectedOption = optionElement.innerText;
+        }
+
+        // التحقق من الإجابة
+        function checkAnswer() {
+            if (!selectedOption) {
+                alert("من فضلك اختر إجابة قبل المتابعة!");
+                return;
+            }
+
+            const currentQuestion = questions[currentQuestionIndex];
+            const resultDiv = document.getElementById("result");
+
+            if (selectedOption === currentQuestion.correctAnswer) {
+                score++;
+                resultDiv.innerHTML = "إجابة صحيحة!";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = "إجابة خاطئة. حاول مرة أخرى.";
+                resultDiv.style.color = "red";
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(displayQuestion, 1000); // الانتقال للسؤال التالي بعد ثانية
+            } else {
+                setTimeout(showFinalScore, 1000); // عرض النتيجة النهائية بعد آخر سؤال
+            }
+        }
+
+        // عرض النتيجة النهائية
+        function showFinalScore() {
+            document.getElementById("question").innerText = "لقد أنهيت الاختبار!";
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("submit").style.display = "none"; // إخفاء زر الإرسال
+            document.getElementById("result").innerHTML = `مجموع درجاتك هو: ${score} من ${questions.length}`;
+        }
+
+        // بدء الاختبار
+        displayQuestion();
+    </script>
+</body>
+</html>

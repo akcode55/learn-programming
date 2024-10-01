@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار Java</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #eee;
+            transition: 0.3s;
+        }
+        .option:hover {
+            background-color: #ddd;
+        }
+        #submit {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #submit:hover {
+            background-color: #555;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>اختبار Java</h2>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button id="submit" onclick="checkAnswer()">إرسال الإجابة</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // قائمة الأسئلة الخاصة بـ Java
+        const questions = [
+            { question: "ما هي الكلمة المفتاحية لتعريف فئة في Java؟", options: ["define", "class", "object", "struct"], correctAnswer: "class" },
+            { question: "ما هي الكلمة المفتاحية لتصريح متغير في Java؟", options: ["let", "var", "int", "String"], correctAnswer: "int" },
+            { question: "ما هي طريقة طباعة النصوص في Java؟", options: ["System.print()", "console.log()", "System.out.println()", "print()"], correctAnswer: "System.out.println()" },
+            { question: "كيف يمكنك تحديد دالة في Java؟", options: ["void", "define", "func", "def"], correctAnswer: "void" },
+            { question: "ما هو اسم المترجم الخاص بلغة Java؟", options: ["JVM", "JDK", "JRE", "Compiler"], correctAnswer: "JVM" },
+            { question: "ما هي الكلمة المفتاحية لإنشاء كائن في Java؟", options: ["new", "create", "init", "object"], correctAnswer: "new" },
+            { question: "ما هو نوع البيانات لتمثيل عدد صحيح في Java؟", options: ["float", "double", "int", "String"], correctAnswer: "int" },
+            { question: "ما هي الكلمة المفتاحية لإنهاء حلقة تكرار في Java؟", options: ["stop", "exit", "break", "end"], correctAnswer: "break" },
+            { question: "ما هي الكلمة المفتاحية لتعريف ثابت في Java؟", options: ["static", "constant", "final", "const"], correctAnswer: "final" },
+            { question: "ما هي الطريقة الصحيحة لتحديد مصفوفة في Java؟", options: ["int array[] = {1, 2, 3};", "int array() = [1, 2, 3];", "array<int> = {1, 2, 3};", "int array = {1, 2, 3};"], correctAnswer: "int array[] = {1, 2, 3};" },
+            { question: "ما هو نوع البيانات لتخزين سلسلة نصية في Java؟", options: ["str", "text", "char", "String"], correctAnswer: "String" },
+            { question: "كيف تقوم بتحويل قيمة إلى سلسلة نصية في Java؟", options: ["value.toString()", "String(value)", "String.valueOf(value)", "value.stringify()"], correctAnswer: "String.valueOf(value)" },
+            { question: "ما هي الطريقة الصحيحة لإنشاء حلقة تكرار باستخدام for في Java؟", options: ["for(int i=0; i<5; i++)", "for i in range(5)", "for(int i=0, i<5; i++)", "for i=0; i<5"], correctAnswer: "for(int i=0; i<5; i++)" },
+            { question: "كيف تقوم بتعريف دالة رئيسية (main) في Java؟", options: ["public static void main(String args[])", "void main()", "def main()", "function main()"], correctAnswer: "public static void main(String args[])" },
+            { question: "ما هي الكلمة المفتاحية لإنشاء وراثة في Java؟", options: ["extends", "inherits", "derives", "base"], correctAnswer: "extends" },
+            { question: "ما هي المكتبة الافتراضية لمعالجة الأخطاء في Java؟", options: ["trycatch", "catcherror", "trycatcherror", "try"], correctAnswer: "trycatch" },
+            { question: "كيف يمكن الحصول على طول المصفوفة في Java؟", options: ["array.length", "array.size()", "array.count()", "array.total()"], correctAnswer: "array.length" },
+            { question: "ما هي الكلمة المفتاحية لإنهاء البرنامج في Java؟", options: ["terminate", "exit", "stop", "end"], correctAnswer: "exit" },
+            { question: "ما هي الكلمة المفتاحية لتحديد قيمة افتراضية في Java؟", options: ["default", "final", "initial", "value"], correctAnswer: "default" },
+            { question: "كيف يتم تحديد قيمة true أو false في Java؟", options: ["boolean", "truefalse", "bool", "flag"], correctAnswer: "boolean" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption;
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            document.getElementById("result").innerHTML = ""; // إخفاء النتيجة
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById("question").innerText = currentQuestion.question;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = ""; // إعادة تعيين الخيارات
+
+            currentQuestion.options.forEach(option => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.innerText = option;
+                optionElement.onclick = () => selectOption(optionElement);
+                optionsDiv.appendChild(optionElement);
+            });
+        }
+
+        // اختيار إجابة
+        function selectOption(optionElement) {
+            const options = document.getElementsByClassName("option");
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.backgroundColor = '#eee';
+            }
+            optionElement.style.backgroundColor = '#ccc';
+            selectedOption = optionElement.innerText;
+        }
+
+        // التحقق من الإجابة
+        function checkAnswer() {
+            if (!selectedOption) {
+                alert("من فضلك اختر إجابة قبل المتابعة!");
+                return;
+            }
+
+            const currentQuestion = questions[currentQuestionIndex];
+            const resultDiv = document.getElementById("result");
+
+            if (selectedOption === currentQuestion.correctAnswer) {
+                score++;
+                resultDiv.innerHTML = "إجابة صحيحة!";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = "إجابة خاطئة. حاول مرة أخرى.";
+                resultDiv.style.color = "red";
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(displayQuestion, 1000); // الانتقال للسؤال التالي بعد ثانية
+            } else {
+                setTimeout(showFinalScore, 1000); // عرض النتيجة النهائية بعد آخر سؤال
+            }
+        }
+
+        // عرض النتيجة النهائية
+        function showFinalScore() {
+            document.getElementById("question").innerText = "لقد أنهيت الاختبار!";
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("result").innerText = `نتيجتك: ${score} من ${questions.length}`;
+        }
+
+        // عرض أول سؤال عند تحميل الصفحة
+        displayQuestion();
+    </script>
+</body>
+</html>
