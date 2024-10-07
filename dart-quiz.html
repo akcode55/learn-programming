@@ -4,58 +4,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار dart</title>
+    <title>اختبار Dart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #a2c4f5, #00416a);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             text-align: center;
+            color: #333;
         }
+
         .quiz-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 50px auto;
-            padding: 20px;
-            width: 80%;
+            background: linear-gradient(145deg, #e0e5ec, #fff);
+            border-radius: 15px;
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
+            margin: 20px;
+            padding: 30px 20px;
+            width: 90%;
             max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .quiz-container:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.15), -12px -12px 20px rgba(255, 255, 255, 0.8);
+        }
+
         .question {
-            font-size: 20px;
+            font-size: 22px;
             margin: 20px 0;
+            color: #00416a;
         }
+
         .options {
             margin: 20px 0;
         }
+
         .option {
-            display: block;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #eee;
-            transition: 0.3s;
-        }
-        .option:hover {
-            background-color: #ddd;
-        }
-        #submit {
-            background-color: #333;
+            background-color: #006494;
             color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.2s;
         }
-        #submit:hover {
-            background-color: #555;
+
+        .option:hover {
+            background-color: #0096c7;
+            transform: scale(1.05);
         }
-        #result {
+
+        .button-container {
             margin-top: 20px;
-            font-size: 24px;
-            color: green;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-button, #submit {
+            background-color: #00416a;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            margin: 5px;
+        }
+
+        .nav-button:hover, #submit:hover {
+            background-color: #005f99;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -64,14 +91,17 @@
         <h2>اختبار Dart</h2>
         <div class="question" id="question"></div>
         <div class="options" id="options"></div>
-        <button id="submit" onclick="checkAnswer()">إرسال الإجابة</button>
+        <div class="button-container">
+            <button class="nav-button" onclick="previousQuestion()">السؤال السابق</button>
+            <button id="submit" onclick="checkAnswer()">إرسال الإجابة</button>
+            <button class="nav-button" onclick="nextQuestion()">السؤال التالي</button>
+        </div>
         <div id="result"></div>
     </div>
 
     <script>
-        // قائمة الأسئلة الخاصة بـ Dart
-        const questions = [
-            { question: "ما هي الكلمة المفتاحية لإنشاء دالة في Dart؟", options: ["function", "void", "def", "create"], correctAnswer: "void" },
+          const questions = [// قائمة الأسئلة الخاصة بـ Dart
+        { question: "ما هي الكلمة المفتاحية لإنشاء دالة في Dart؟", options: ["function", "void", "def", "create"], correctAnswer: "void" },
             { question: "كيف يمكنك إنشاء كائن من فئة في Dart؟", options: ["ClassName obj;", "ClassName obj = new ClassName();", "ClassName obj();", "ClassName obj = ClassName();"], correctAnswer: "ClassName obj = new ClassName();" },
             { question: "ما هي الكلمة المفتاحية المستخدمة لتعريف متغير ثابت؟", options: ["const", "static", "final", "immutable"], correctAnswer: "const" },
             { question: "ما هي الطريقة الصحيحة للإعلان عن قائمة؟", options: ["List<int> myList;", "var myList = []; ", "List myList = new List();", "List myList = List<int>();"], correctAnswer: "List<int> myList;" },
@@ -118,10 +148,26 @@
         function selectOption(optionElement) {
             const options = document.getElementsByClassName("option");
             for (let i = 0; i < options.length; i++) {
-                options[i].style.backgroundColor = '#eee';
+                options[i].style.backgroundColor = '#006494';
             }
-            optionElement.style.backgroundColor = '#ccc';
+            optionElement.style.backgroundColor = '#00416a';
             selectedOption = optionElement.innerText;
+        }
+
+        // الانتقال للسؤال التالي
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        }
+
+        // الانتقال للسؤال السابق
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
         }
 
         // التحقق من الإجابة
@@ -154,13 +200,13 @@
 
         // عرض النتيجة النهائية
         function showFinalScore() {
-            document.getElementById("question").innerText = "";
+            document.getElementById("question").innerText = "لقد أنهيت الاختبار!";
             document.getElementById("options").innerHTML = "";
-            document.getElementById("submit").style.display = "none"; // إخفاء زر الإرسال
-            document.getElementById("result").innerHTML = `مجموع درجاتك هو: ${score} من ${questions.length}`;
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("result").innerText = `نتيجتك: ${score} من ${questions.length}`;
         }
 
-        // بدء الاختبار
+        // عرض أول سؤال عند تحميل الصفحة
         displayQuestion();
     </script>
 </body>
