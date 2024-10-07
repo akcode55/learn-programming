@@ -8,45 +8,54 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #fff;
+            background: linear-gradient(135deg, #a2c4f5, #00416a);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column; /* إضافة لتوسيع التصميم عموديًا */
-            height: 100vh;
+            flex-direction: column;
+            min-height: 100vh; /* لتوسيع التصميم بشكل كامل */
         }
         .logo {
-            width: 250px; /* زيادة عرض الصورة */
-            height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
-            margin-bottom: 20px; /* إضافة مسافة بين الصورة والنص */
+            width: 180px; /* ضبط عرض الصورة */
+            height: auto; /* الحفاظ على النسبة */
+            margin-bottom: 20px;
+            border-radius: 50%; /* جعل الصورة دائرية */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* إضافة ظل */
         }
         .contact-container {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* إضافة ظل ناعم */
         }
         h1 {
             color: #333;
-            font-size: 22px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         .phone-number {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #00416a;
+            font-weight: bold;
         }
         .whatsapp-btn {
-            background-color: #00416a;
+            background-color: #00416a; /* لون الزر الرئيسي */
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 18px;
+            padding: 15px 50px;
+            font-size: 20px;
             border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* ظل للزر */
+            transition: all 0.3s ease; /* تأثير الانتقال */
         }
         .whatsapp-btn:hover {
-            background-color: #156597;
+            background-color: #002b4d; /* لون مختلف عند التحويم */
+            transform: translateY(-5px); /* تحريك الزر عند التحويم */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* زيادة الظل */
         }
         .whatsapp-btn i {
             margin-left: 10px;
@@ -57,7 +66,7 @@
     <img class="logo" src="hero.png" alt="شعار المشروع">
 
     <div class="contact-container">
-        <h1>تواصل مع مطور المشروع (أحمد محمد قنديل) عبر الواتس اب او الهاتف المحمول</h1>
+        <h1>تواصل مع مطور المشروع (أحمد محمد قنديل) عبر الواتس اب أو الهاتف المحمول</h1>
         <div class="phone-number">+20 12 08462622</div>
         <button class="whatsapp-btn" onclick="window.location.href='https://wa.me/201208462622'">
             متابعة إلى الدردشة
