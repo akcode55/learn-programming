@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قنوات يوتيوب لتعلم لغات البرمجة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #a2c4f5, #00416a);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #00416a;
+            color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s;
+        }
+        header:hover {
+            background: #005f99;
+        }
+        header h1 {
+            font-size: 30px;
+            margin: 0;
+        }
+        header h2 {
+            font-size: 18px;
+            margin: 5px 0;
+            font-weight: 300;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 16px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: #006494;
+            transition: background-color 0.3s ease-in-out, transform 0.3s;
+        }
+        .nav-links a:hover {
+            background: #0096c7;
+            transform: scale(1.1);
+        }
+        .fa-bars {
+            display: none;
+            cursor: pointer;
+        }
+        .channel-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 30px;
+            margin-bottom: 30px;
+        }
+        .channel-item {
+            background: linear-gradient(145deg, #e0e5ec, #fff);
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 25px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .channel-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.15), -12px -12px 20px rgba(255, 255, 255, 0.8);
+        }
+        .channel-item img {
+            width: 50px;
+            height: 50px;
+            margin: 10px 0;
+        }
+        .channel-item a {
+            text-decoration: none;
+            color: #00416a;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        footer {
+            background: #00416a;
+            color: #fff;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1> قنوات يوتيوب لتعلم لغات البرمجة/h1>
+       
+    </div>
+    <i id="btn-menu" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+    <div class="nav-links" id="nav-links">
+        <a href="index.html" class="active">الرئيسية</a>
+        <a href="Road.html">خطط التعلم</a>
+        <a href="learn.html">قنوات اليوتيوب</a>
+        <a href="https://e-resume.vercel.app/">إنشاء سيرتك الذاتية</a>
+        <a href="Contact.html">تواصل معنا</a>
+    </div>
+</header>
+
+<h1>استكشف القنوات العربية المشهورة لتعلم البرمجة</h1>
+
+<div class="channel-container">
+    <div class="channel-item">
+        <img src="5.jpg" alt="قناة أوسامة الزيرو">
+        <a href="https://www.youtube.com/@ElzeroWebSchool" target="_blank">قناة أوسامة الزيرو</a>
+    </div>
+    <div class="channel-item">
+        <img src="6.jpg" alt="قناة كودزيلا">
+        <a href="https://www.youtube.com/@Codezilla" target="_blank">قناة كودزيلا</a>
+    </div>
+    <div class="channel-item">
+        <img src="4.jpg" alt="قناة  Abdelrahman Gamal">
+        <a href="https://www.youtube.com/@AbdelrahmanGamal" target="_blank">قناة  Abdelrahman Gamal</a>
+    </div>
+    <div class="channel-item">
+        <img src="1.jpg" alt="قناة محمد عيسى">
+        <a href="https://www.youtube.com/@ProgrammingAdvices" target="_blank">قناة  Programming Advices</a>
+    </div>
+    <div class="channel-item">
+        <img src="3.jpg" alt="قناة أكاديمية حسوب">
+        <a href="https://www.youtube.com/@HsoubAcademy" target="_blank">قناة أكاديمية حسوب</a>
+    </div>
+    <div class="channel-item">
+        <img src="7.jpg" alt="قناة عبد الله عيد">
+        <a href="https://www.youtube.com/@abdullahdiaa" target="_blank">قناة Abdullah Diaa</a>
+    </div>
+    <div class="channel-item">
+        <img src="2.jpg" alt="قناة  اتعلم ببساطة">
+        <a href="https://www.youtube.com/@Learn_Simply" target="_blank">قناة اتعلم ببساطة</a>
+    </div>
+</div>
+
+<footer>
+    جميع الحقوق محفوظة &copy; 2024 - فريق تطوير
+</footer>
+
+</body>
+</html>
