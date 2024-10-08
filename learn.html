@@ -61,6 +61,36 @@
             display: none;
             cursor: pointer;
         }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #00416a;
+                position: absolute;
+                right: 0;
+                top: 80px;
+                width: 250px;
+                padding: 20px;
+                border-radius: 10px 0 0 10px;
+                box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.3);
+                animation: slideDown 0.5s ease forwards;
+                transform: translateY(-10px);
+                z-index: 1000; /* تأكد من أن القائمة فوق العناصر الأخرى */
+            }
+            .fa-bars, .fa-times {
+                display: block;
+                font-size: 24px;
+                margin-left: 15px;
+            }
+            .nav-links.show {
+                display: flex;
+                animation: slideDown 0.5s ease forwards;
+            }
+        }
+        .fa-times {
+            color: #ffde7d;
+            margin-right: 15px;
+        }
         .channel-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -107,17 +137,18 @@
 
 <header>
     <div>
-        <h1> قنوات يوتيوب لتعلم لغات البرمجة/h1>
+        <h1> قنوات يوتيوب لتعلم لغات البرمجة</h1>
        
     </div>
     <i id="btn-menu" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
-    <div class="nav-links" id="nav-links">
-        <a href="index.html" class="active">الرئيسية</a>
-        <a href="Road.html">خطط التعلم</a>
-        <a href="learn.html">قنوات اليوتيوب</a>
-        <a href="https://e-resume.vercel.app/">إنشاء سيرتك الذاتية</a>
-        <a href="Contact.html">تواصل معنا</a>
-    </div>
+        <i id="btn-close" class="fa-solid fa-times" style="display: none;" onclick="toggleMenu()"></i>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html" class="active">الرئيسية</a>
+            <a href="Road.html">خطط التعلم</a>
+            <a href="learn.html">قنوات اليوتيوب</a>
+            <a href="https://e-resume.vercel.app/">إنشاء سيرتك الذاتية</a>
+            <a href="Contact.html">تواصل معنا</a>
+        </div>
 </header>
 
 <h1>استكشف القنوات العربية المشهورة لتعلم البرمجة</h1>
@@ -156,6 +187,20 @@
 <footer>
     جميع الحقوق محفوظة &copy; 2024 - فريق تطوير
 </footer>
+<script>
+    function toggleMenu() {
+        var navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('show');
+    }
 
+    // إغلاق القائمة عند النقر خارجها
+    window.onclick = function(event) {
+        var navLinks = document.getElementById('nav-links');
+        var btnMenu = document.getElementById('btn-menu');
+        if (!event.target.matches('#btn-menu') && !navLinks.contains(event.target)) {
+            navLinks.classList.remove('show');
+        }
+    };
+</script>
 </body>
 </html>
