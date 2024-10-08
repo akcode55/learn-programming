@@ -70,17 +70,32 @@
                 position: absolute;
                 right: 0;
                 top: 80px;
-                width: 200px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 250px;
+                padding: 20px;
+                border-radius: 10px 0 0 10px;
+                box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.3);
+                animation: slideDown 0.5s ease forwards;
+                transform: translateY(-10px);
+                z-index: 1000; /* تأكد من أن القائمة فوق العناصر الأخرى */
             }
-            .fa-bars {
+            .fa-bars, .fa-times {
                 display: block;
                 font-size: 24px;
+                margin-left: 15px;
             }
             .nav-links.show {
                 display: flex;
+                animation: slideDown 0.5s ease forwards;
             }
         }
+        .fa-times {
+            color: #ffde7d;
+            margin-right: 15px;
+        }
+            .nav-links.show {
+                display: flex;
+            }
+        
         h1 {
             color: #333;
             margin: 30px 0;
@@ -130,6 +145,7 @@
         <h2>اختر لغة البرمجة التي تريد عرض خريطة الطريق الخاصة بها</h2>
     </div>
     <i id="btn-menu" class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+    <i id="btn-close" class="fa-solid fa-times" style="display: none;" onclick="toggleMenu()"></i>
     <div class="nav-links" id="nav-links">
         <a href="index.html" class="active">الرئيسية</a>
         <a href="Road.html">خطط التعلم</a>
@@ -189,6 +205,15 @@
         var navLinks = document.getElementById('nav-links');
         navLinks.classList.toggle('show');
     }
+
+    // إغلاق القائمة عند النقر خارجها
+    window.onclick = function(event) {
+        var navLinks = document.getElementById('nav-links');
+        var btnMenu = document.getElementById('btn-menu');
+        if (!event.target.matches('#btn-menu') && !navLinks.contains(event.target)) {
+            navLinks.classList.remove('show');
+        }
+    };
 </script>
 
 </body>
